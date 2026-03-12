@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Admission Form</title>
+</head>
+
+<body bgcolor="lightyellow">
+
+    <h2 align="center">COLLEGE ONLINE ADMISSION FORM<br>
+        (Bhashini CSE25034)</h2>
+
+    <form>
+
+        <table border="1" align="center" cellpadding="8" cellspacing="0" width="70%" bgcolor="beige">
+
+            <tr>
+                <td><label for="fname">First Name:</label></td>
+                <td><input type="text" id="fname" name="fname" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="lname">Last Name:</label></td>
+                <td><input type="text" id="lname" name="lname" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="dob">Date of Birth:</label></td>
+                <td><input type="date" id="dob" name="dob"></td>
+            </tr>
+
+            <tr>
+                <td><label>Gender:</label></td>
+                <td>
+                    <input type="radio" id="male" name="gender" value="Male">
+                    <label for="male">Male</label>
+
+                    <input type="radio" id="female" name="gender" value="Female">
+                    <label for="female">Female</label>
+
+                    <input type="radio" id="other" name="gender" value="Other">
+                    <label for="other">Other</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email"></td>
+            </tr>
+
+            <tr>
+                <td><label for="phone">Mobile Number:</label></td>
+                <td><input type="tel" id="phone" name="phone"></td>
+            </tr>
+
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><textarea id="address" name="address" rows="3" cols="30"></textarea></td>
+            </tr>
+
+            <tr>
+                <td><label for="course">Course Applying For:</label></td>
+                <td>
+                    <select id="course" name="course">
+                        <option value="">--Select Course--</option>
+                        <option value="BTech">B.Tech</option>
+                        <option value="BSc">B.Sc</option>
+                        <option value="BCom">B.Com</option>
+                        <option value="BA">B.A</option>
+                        <option value="MTech">M.Tech</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="marks">12th Percentage:</label></td>
+                <td><input type="number" id="marks" name="marks"></td>
+            </tr>
+
+            <tr>
+                <td><label for="photo">Upload Photo:</label></td>
+                <td><input type="file" id="photo" name="photo"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</body>
+</html>

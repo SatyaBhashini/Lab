@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Website</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .nav {
+            background-color: #34495e;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            color: yellow;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+    </style>
+
+    <script>
+        function loadPage(page) {
+            var frame = document.getElementById("contentFrame");
+
+            if (page == "home") {
+                frame.srcdoc = `
+                <body bgcolor="lightblue">
+                    <h2 align="center">Welcome to Our Website</h2>
+                    <p align="center">
+                        This is the home page of our mini website.<br>
+                        Here you can find basic information and updates.<br>
+                        Welcome to our mini website.<br>
+                        This site is designed to give you a quick overview of who we are and what we do.<br>
+                        Use the navigation links above to explore the Home, About, and Contact sections.<br>
+                        You can read about our goals, values, and how to reach us for any queries or support.<br>
+                    </p>
+                </body>`;
+            }
+
+            if (page == "about") {
+                frame.srcdoc = `
+                <body bgcolor="lightgreen">
+                    <h2 align="center">About Us</h2>
+                    <p align="center">
+                        We are a growing organization focused on innovation,
+                        creativity, and delivering quality services.<br>
+                        This mini website is a small project created to demonstrate basic web design.<br>
+                        It uses simple HTML, CSS, and JavaScript to switch between pages inside one layout.<br>
+                        Our goal is to keep the design clean and easy to understand for new users.<br>
+                        This mini website can be expanded later with more pages and features.<br>
+
+
+                    </p>
+                </body>`;
+            }
+
+            if (page == "contact") {
+                frame.srcdoc = `
+                <body bgcolor="lightyellow">
+                    <h2 align="center">Contact Us</h2>
+                    <p align="center">
+                        Email: helpcenter@gmail.com <br><br>
+                        Phone: +91 9876543210
+                    </p>
+                </body>`;
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="loadPage('home')">
+
+    <div class="header">
+        <h1>Mini Website</h1>
+    </div>
+
+    <div class="nav">
+        <a onclick="loadPage('home')">Home</a>
+        <a onclick="loadPage('about')">About</a>
+        <a onclick="loadPage('contact')">Contact</a>
+    </div>
+
+    <iframe id="contentFrame"></iframe>
+
+</body>
+</html>
