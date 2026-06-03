@@ -1,0 +1,291 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Programs Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        input[type="number"] {
+            padding: 15px 20px;
+            font-size: 1.2em;
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 18px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-even { background: linear-gradient(45deg, #48bb78, #38a169); color: white; }
+        .btn-odd { background: linear-gradient(45deg, #f56565, #e53e3e); color: white; }
+        .btn-prime { background: linear-gradient(45deg, #ed8936, #dd6b20); color: white; }
+        .btn-factorial { background: linear-gradient(45deg, #9f7aea, #805ad5); color: white; }
+        .btn-armstrong { background: linear-gradient(45deg, #4299e1, #3182ce); color: white; }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        button:active {
+            transform: translateY(-2px);
+        }
+
+        .output-section {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            border-left: 6px solid #667eea;
+            min-height: 120px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .output-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .even { background: #c6f6d5; color: #22543d; }
+        .odd { background: #fed7d7; color: #742a2a; }
+        .prime { background: #c6f6d5; color: #22543d; }
+        .not-prime { background: #fed7d7; color: #742a2a; }
+        .factorial-result { background: #bee3f8; color: #2c5282; }
+        .armstrong { background: #c6f6d5; color: #22543d; }
+        .not-armstrong { background: #fed7d7; color: #742a2a; }
+
+        .calculation-steps {
+            font-size: 0.95em;
+            color: #4a5568;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .buttons-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Number Programs Dashboard</h1>
+        
+        <div class="input-section">
+            <label for="numberInput" style="display: block; font-size: 1.3em; margin-bottom: 15px; color: #4a5568;">
+                Enter a Number:
+            </label>
+            <input type="number" id="numberInput" min="0" placeholder="e.g., 153" required>
+        </div>
+
+        <div class="buttons-grid">
+            <button class="btn-even" onclick="checkEvenOdd('even')">Even?</button>
+            <button class="btn-odd" onclick="checkEvenOdd('odd')">Odd?</button>
+            <button class="btn-prime" onclick="checkPrime()">Prime?</button>
+            <button class="btn-factorial" onclick="calculateFactorial()">Factorial</button>
+            <button class="btn-armstrong" onclick="checkArmstrong()">Armstrong?</button>
+        </div>
+
+        <div id="outputSection" class="output-section">
+            <div id="result"></div>
+            <div id="steps" class="calculation-steps"></div>
+        </div>
+    </div>
+
+    <script>
+        function showResult(message, type, steps = '') {
+            const resultDiv = document.getElementById('result');
+            const stepsDiv = document.getElementById('steps');
+            const outputSection = document.getElementById('outputSection');
+            
+            resultDiv.textContent = message;
+            resultDiv.className = `result ${type}`;
+            stepsDiv.textContent = steps;
+            stepsDiv.style.display = steps ? 'block' : 'none';
+            outputSection.classList.add('show');
+            
+            // Scroll to result
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getInput() {
+            const input = parseInt(document.getElementById('numberInput').value);
+            if (isNaN(input) || input < 0) {
+                showResult('Please enter a valid positive number!', 'not-armstrong');
+                return null;
+            }
+            return input;
+        }
+
+        function checkEvenOdd(type) {
+            const num = getInput();
+            if (num === null) return;
+            
+            const isEven = num % 2 === 0;
+            const result = isEven ? 'Even' : 'Odd';
+            const expectedType = type === 'even' ? isEven : !isEven;
+            
+            if (expectedType) {
+                showResult(`${num} is **${result}**! ✅`, result.toLowerCase());
+            } else {
+                showResult(`${num} is **${result}** (not what you expected)! ❌`, result.toLowerCase());
+            }
+        }
+
+        function checkPrime() {
+            const num = getInput();
+            if (num === null) return;
+            
+            if (num <= 1) {
+                showResult(`${num} is **not a prime number** (primes start from 2)! ❌`, 'not-prime');
+                return;
+            }
+            
+            let isPrime = true;
+            let steps = `Checking divisibility from 2 to √${num} (${Math.floor(Math.sqrt(num))})...\n`;
+            
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    steps += `• ${num} ÷ ${i} = ${num/i} (divisible, not prime)\n`;
+                    break;
+                }
+                steps += `• ${num} ÷ ${i} ≠ integer\n`;
+            }
+            
+            if (isPrime) {
+                showResult(`${num} is **PRIME**! ✅`, 'prime', steps);
+            } else {
+                showResult(`${num} is **NOT PRIME**! ❌`, 'not-prime', steps);
+            }
+        }
+
+        function calculateFactorial() {
+            const num = getInput();
+            if (num === null) return;
+            
+            if (num > 20) {
+                showResult('Factorial too large for display! Try a smaller number. ⚠️', 'not-armstrong');
+                return;
+            }
+            
+            let factorial = 1;
+            let steps = '';
+            
+            for (let i = 1; i <= num; i++) {
+                factorial *= i;
+                steps += `${i}! = ${factorial}\n`;
+            }
+            
+            showResult(`${num}! = **${factorial.toLocaleString()}**`, 'factorial-result', steps);
+        }
+
+        function checkArmstrong() {
+            const num = getInput();
+            if (num === null) return;
+            
+            const numStr = num.toString();
+            const digits = numStr.length;
+            let sum = 0;
+            let steps = `Digits: ${digits}\n`;
+            
+            for (let digit of numStr) {
+                const power = parseInt(digit) ** digits;
+                sum += power;
+                steps += `• ${digit}^${digits} = ${power}\n`;
+            }
+            
+            if (sum === num) {
+                showResult(`${num} is an **Armstrong Number**! ✅`, 'armstrong', steps);
+            } else {
+                showResult(`${num} is **NOT Armstrong** (${sum} ≠ ${num})! ❌`, 'not-armstrong', steps);
+            }
+        }
+    </script>
+</body>
+</html>

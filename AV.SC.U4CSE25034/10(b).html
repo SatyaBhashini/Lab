@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Arrange Three Numbers</title>
+
+    <style>
+        body {
+            font-family: Verdana;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        input {
+            padding: 7px;
+            margin: 6px;
+            width: 90px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Arrange Three Numbers in Descending Order</h2>
+
+    <input type="number" id="n1" placeholder="Enter 1st Number">
+    <input type="number" id="n2" placeholder="Enter 2nd Number">
+    <input type="number" id="n3" placeholder="Enter 3rd Number">
+
+    <br>
+
+    <button onclick="arrangeNumbers()">Arrange</button>
+
+    <p id="output"></p>
+
+    <script>
+
+        function arrangeNumbers() {
+
+            let x = Number(document.getElementById("n1").value);
+            let y = Number(document.getElementById("n2").value);
+            let z = Number(document.getElementById("n3").value);
+
+            let largest, middle, smallest;
+
+            if (x >= y && x >= z) {
+                largest = x;
+
+                if (y >= z) {
+                    middle = y;
+                    smallest = z;
+                } else {
+                    middle = z;
+                    smallest = y;
+                }
+
+            } else if (y >= x && y >= z) {
+
+                largest = y;
+
+                if (x >= z) {
+                    middle = x;
+                    smallest = z;
+                } else {
+                    middle = z;
+                    smallest = x;
+                }
+
+            } else {
+
+                largest = z;
+
+                if (x >= y) {
+                    middle = x;
+                    smallest = y;
+                } else {
+                    middle = y;
+                    smallest = x;
+                }
+            }
+
+            document.getElementById("output").innerHTML =
+                "Numbers in Descending Order: " +
+                largest + ", " + middle + ", " + smallest;
+        }
+
+    </script>
+
+</body>
+
+</html>

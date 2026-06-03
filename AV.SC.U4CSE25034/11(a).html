@@ -1,0 +1,83 @@
+<!DOCTYPE html> 
+
+<html> 
+
+ <head> 
+
+    <title>Username Validation</title> 
+
+    <style> 
+
+        body { 
+
+            font-family: Arial; 
+
+            text-align: center; 
+
+            margin-top: 50px; 
+
+        } 
+
+        input { 
+
+            padding: 8px; 
+
+            width: 220px; 
+
+        } 
+
+        #message { 
+
+            margin-top: 10px; 
+
+            font-size: 18px; 
+
+           color: red; 
+
+        } 
+
+    </style> 
+
+</head> 
+
+ <body> 
+    
+    <h2>Username Validation</h2> 
+
+    <input type="text" id="username" placeholder="Enter Username" 
+
+           onkeyup="checkUsername()"> 
+
+    <p id="message"></p> 
+
+    <script> 
+
+        function checkUsername() { 
+
+            let username = 
+
+                document.getElementById("username").value; 
+
+            if (username.length < 5) { 
+
+                document.getElementById("message").innerHTML = 
+
+                    "Username must contain at least 5 characters"; 
+
+           } 
+
+            else { 
+
+                 document.getElementById("message").innerHTML = 
+
+                    "Valid Username"; 
+
+            } 
+
+        } 
+
+    </script> 
+
+</body> 
+
+</html> 

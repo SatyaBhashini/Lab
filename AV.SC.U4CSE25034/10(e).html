@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Average Marks Calculator</title>
+</head>
+<body>
+    
+    <h1>Enter 6 Subject Marks (comma separated)</h1>
+
+    <input type="text" id="marks" placeholder="70,80,95,50,60,70">
+    <br><br>
+
+    <button onclick="calculateAverage()">Calculate</button>
+
+    <h2 id="average"></h2>
+    <h2 id="grade"></h2>
+
+    <script>
+        function calculateAverage() {
+
+            let marksInput = document.getElementById("marks").value;
+            let marks = marksInput.split(",");
+
+            if (marks.length != 6) {
+                alert("Please enter exactly 6 subject marks.");
+                return;
+            }
+
+            let sum = 0;
+
+            for (let i = 0; i < marks.length; i++) {
+                sum += parseFloat(marks[i]);
+            }
+
+            let average = sum / 6;
+            let grade;
+
+            if (average >= 90)
+                grade = "A+";
+            else if (average >= 80)
+                grade = "A";
+            else if (average >= 70)
+                grade = "B";
+            else if (average >= 60)
+                grade = "C";
+            else if (average >= 50)
+                grade = "D";
+            else
+                grade = "F";
+
+            document.getElementById("average").innerHTML =
+                "Average: " + average.toFixed(2);
+
+            document.getElementById("grade").innerHTML =
+                "Grade: " + grade;
+        }
+    </script>
+
+</body>
+</html>
